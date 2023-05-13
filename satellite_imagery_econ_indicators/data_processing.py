@@ -23,6 +23,11 @@ class data_bundle:
         features_img = features_img/255.0
         self.images = features_img
 
+    def normalize_popn(self):
+        features_popn = self.popn
+        features_popn = (features_popn - 50000)/450000 
+        self.images = features_popn
+
     def bundle_inputs(self):
         features = np.array(list(zip(self.images, np.array(self.popn))))
         self.features = features
