@@ -26,7 +26,7 @@ class data_bundle:
     def normalize_popn(self):
         features_popn = self.popn
         features_popn = (features_popn - 50000)/450000 
-        self.images = features_popn
+        self.popn = features_popn
 
     def bundle_inputs(self):
         features = np.array(list(zip(self.images, np.array(self.popn))))
