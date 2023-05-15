@@ -47,6 +47,49 @@ class data_bundle:
         self.y_val = y_val
         self.y_test = y_test
 
+    def augment_training_data(self):
+        combined = []
+
+        for i in range(self.X_train.shape[0]):
+            combined.append([self.X_train[i][0], self.X_train[i][1], self.y_train[i]])
+
+        augmented = []
+
+        time = 1
+
+        for i in combined:
+
+            if i[2] != 1:
+                augmented.append(i)
+
+                if time == 1:
+                    augmented.append(np.array([np.rot90(i[0]), i[1], i[2]]))
+                    time = 2
+
+                elif time == 2:
+                    augmented.append(np.array([np.rot90(np.rot90(i[0])), i[1], i[2]]))
+                    time = 3
+
+                elif time == 3:
+                    augmented.append(np.array([np.rot90(np.rot90(np.rot90(i[0]))), i[1], i[2]]))
+                    time = 1
+            
+            elif i[2] == 1:
+                augmented.append(i)
+                augmented.append(np.array([np.rot90(i[0]), i[1], i[2]]))
+                augmented.append(np.array([np.rot90(np.rot90(i[0])), i[1], i[2]]))
+                augmented.append(np.array([np.rot90(np.rot90(np.rot90(i[0]))), i[1], i[2]]))
+                augmented.append(np.array([np.fliplr(i[0]), i[1], i[2]]))
+                augmented.append(np.array([np.flipud(i[0]), i[1], i[2]]))
+
+            elif i[2] == 2:
+                augmented.append(i)
+                augmented.append(np.array([np.flipud(i[0]), i[1], i[2]]))
+
+        np.random.shuffle(np.array(augmented))
+        self.X_train = augmented[:,:2]
+        self.y_train = augmented[:,2]
+
     def unbundle_and_shape_inputs(self):
         X_train_img = self.X_train[:,0]
         X_val_img = self.X_val[:,0]
