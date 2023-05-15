@@ -86,7 +86,8 @@ class data_bundle:
                 augmented.append(i)
                 augmented.append(np.array([np.flipud(i[0]), i[1], i[2]]))
 
-        np.random.shuffle(np.array(augmented))
+        augmented = np.array(augmented)
+        np.random.shuffle(augmented)
         self.X_train = augmented[:,:2]
         self.y_train = augmented[:,2]
 
