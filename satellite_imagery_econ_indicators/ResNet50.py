@@ -21,7 +21,7 @@ class rn50_seei:
         self.input_shape = input_shape
         self.dual = False
     
-    def load_and_freeze_vgg16(self):
+    def load_and_freeze_rn50(self):
 
         # Import VGG16
         self.model = ResNet50(include_top=False, input_shape=self.input_shape)
