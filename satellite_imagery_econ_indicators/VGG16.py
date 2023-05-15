@@ -8,6 +8,7 @@ from keras.applications.vgg16 import VGG16
 import tensorflow as tf
 import tensorflow.keras as keras
 import tensorflow.keras.layers as layers
+from tensorflow.keras import optimizers
 
 #######################################################
 # VGG16 model
@@ -71,7 +72,7 @@ class vgg16_seei:
         # Output layer 
         self.output = layers.Dense(4, activation='softmax')(dense_f)
 
-    def define_and_compile_model(self, optimizer='adam'):
+    def define_and_compile_model(self, optimizer):
 
         if self.dual:
         
@@ -81,7 +82,7 @@ class vgg16_seei:
 
             self.defined_model = Model(inputs=self.model.inputs, outputs=self.output)
 
-        self.defined_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        self.defined_model.compile(loss='categorical_crossentropy', optimizer= optimizer, metrics=['accuracy'])
 
     
     def fit_model(self, batch_size = 64, epochs = 100, train_in = None, train_tar = None, 
