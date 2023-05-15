@@ -18,7 +18,7 @@ class data_bundle:
         self.image_channels = self.images[0].shape[2]
 
         if augmented:
-            self.popn = pd.read_csv(popn_path)
+            self.popn = np.load(popn_path)
         else:
             self.popn = pd.read_csv(popn_path)[["2019_figure_est"]]
 
