@@ -15,11 +15,9 @@ import tensorflow.keras.layers as layers
 
 class vgg16_seei:
 
-    def __init__(self, input_shape, dropout_rate, learning_rate):
+    def __init__(self, input_shape):
 
         self.input_shape = input_shape
-        self.dropout_rate = dropout_rate
-        self.learning_rate = learning_rate
         self.dual = False
     
     def load_and_freeze_vgg16(self):
@@ -51,7 +49,9 @@ class vgg16_seei:
 
         self.dual = True
 
-    def add_dense_layers(self):
+    def add_dense_layers(self, dropout_rate = 0.5):
+        
+        self.dropout_rate = dropout_rate
 
         # Dense layers
         dense_1 = layers.Dense(256, activation='relu')(self.inputs)
@@ -88,7 +88,7 @@ class vgg16_seei:
                   validation_in = None, validation_tar = None ,es_patience = 25):
 
         # Early stopping 
-        es = EarlyStopping(monitor='val_accuracy', mode='max', patience=25,  restore_best_weights=True)
+        es = EarlyStopping(monitor='val_accuracy', mode='max', patience=es_patience,  restore_best_weights=True)
         
         # Model fit
         self.fit = self.defined_model.fit(train_in, train_tar, validation_data=(validation_in, validation_tar), 
