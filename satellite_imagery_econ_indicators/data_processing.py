@@ -9,14 +9,18 @@ from sklearn.model_selection import train_test_split
 
 # Loading image features and normalizing values
 class data_bundle:
-    def __init__(self, images_path, popn_path, labels_path, label_type):
+    def __init__(self, images_path, popn_path, labels_path, label_type, augmented):
         self.images = np.load(images_path)
-        self.popn = pd.read_csv(popn_path)[["2019_figure_est"]]
         self.labels = np.load(labels_path)
         self.label_type = label_type
         self.image_height = self.images[0].shape[0]
         self.image_width = self.images[0].shape[1]
         self.image_channels = self.images[0].shape[2]
+
+        if augmented:
+            self.popn = pd.read_csv(popn_path)
+        else:
+            self.popn = pd.read_csv(popn_path)[["2019_figure_est"]]
 
     def normalize_images(self):
         features_img = self.images.astype('float32')
