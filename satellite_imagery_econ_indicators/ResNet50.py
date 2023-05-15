@@ -4,7 +4,7 @@ from keras.callbacks import EarlyStopping
 from keras.models import Model
 from keras.layers import Dense, Flatten, Input, Concatenate, Dropout
 from keras.regularizers import l2
-from keras.applications.vgg16 import ResNet50
+from keras.applications.resnet import ResNet50
 import tensorflow as tf
 import tensorflow.keras as keras
 import tensorflow.keras.layers as layers
