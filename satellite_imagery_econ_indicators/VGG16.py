@@ -49,7 +49,7 @@ class vgg16_seei:
 
         self.dual = True
 
-    def add_dense_layers(self, dropout_rate = 0.5):
+    def add_dense_layers(self, dropout_rate = 0.25):
         
         self.dropout_rate = dropout_rate
 
