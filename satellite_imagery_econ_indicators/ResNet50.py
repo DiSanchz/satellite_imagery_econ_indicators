@@ -56,6 +56,9 @@ class rn50_seei:
         self.dropout_rate = dropout_rate
 
         # Dense layers
+        dense_2 = layers.Dense(1024, activation='relu')(self.inputs)
+        dropout__1 = Dropout(self.dropout_rate)(dense_2)
+
         dense_3 = layers.Dense(512, activation='relu')(self.inputs)
         dropout_0 = Dropout(self.dropout_rate)(dense_3)
 
