@@ -57,7 +57,7 @@ class rn50_seei:
 
         # Dense layers
 
-        dense_1 = layers.Dense(2048, activation='relu')(dropout__3)
+        dense_1 = layers.Dense(2048, activation='relu')(self.inputs)
         dropout__2 = Dropout(self.dropout_rate)(dense_1)
 
         dense_2 = layers.Dense(1024, activation='relu')(dropout__2)
